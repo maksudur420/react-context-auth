@@ -22,7 +22,7 @@ const Register = () => {
 
     const handleSubmit =(e)=>{
         e.preventDefault()
-        const {name,email,password }=data
+        const {email,password }=data
         console.log(data)
         setData({email:'',password:'',name:''})
 
