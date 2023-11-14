@@ -1,10 +1,15 @@
 import { useState } from "react";
 import { Link } from "react-router-dom"
+import { useContext } from "react"
+import { authContext } from "./AuthProvider"
+
 
 
 const Register = () => {
 
+
     const [data, setData] =useState({email:'',password:'',name:''});
+    const {createUser} = useContext(authContext)
 
     const handleChangeData =(e)=>{
         const {name,value} =e.target;
@@ -18,8 +23,18 @@ const Register = () => {
     const handleSubmit =(e)=>{
         e.preventDefault()
         const {name,email,password }=data
-        console.log(name,email,password)
+        console.log(data)
         setData({email:'',password:'',name:''})
+
+        //create user
+        createUser(email,password)
+        .then(result=>{
+            console.log(result.user)
+        })
+        .catch((err) => {
+            console.log(err.message)
+        })
+    
     }
 
   return (

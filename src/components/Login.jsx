@@ -1,8 +1,10 @@
-import { useState } from "react"
+import { useContext, useState } from "react"
 import { Link } from "react-router-dom"
+import { authContext } from "./AuthProvider";
 
 const Login = () => {
     const [data, setData] =useState({email:'',password:''});
+    const {signInUser} =useContext(authContext)
 
     const handleChangeData =(e)=>{
         const {name,value} =e.target;
@@ -20,6 +22,13 @@ const Login = () => {
         console.log(email,password)
 
         setData({email:'',password:''})
+
+        signInUser(email,password)
+        .then((result) => {
+            console.log(result.user)
+        }).catch((err) => {
+            console.log(err.message)
+        })
     }
   return (
     <div className="hero min-h-screen bg-base-200">
